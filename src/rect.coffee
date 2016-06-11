@@ -8,11 +8,20 @@ module.exports = class Rect
     @_fill().drawRect(0, 0, Config.CELL_WIDTH, Config.CELL_WIDTH)
 
   setPosition: (p)->
+    @position = p
     @shape.x = p.x * Config.CELL_WIDTH
     @shape.y = p.y * Config.CELL_WIDTH
 
+  getPosition: ->
+    @position
+
   getShape: ->
     @shape
+
+  up: -> @setPosition(@position.up())
+  down: -> @setPosition(@position.down())
+  left: -> @setPosition(@position.left())
+  right: -> @setPosition(@position.right())
 
   _fill: ->
     if @image
