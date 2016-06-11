@@ -21,7 +21,7 @@ class Nanoside
 
   _init_test_characters: ->
     @board = new Board()
-    for i in [0...1]
+    for i in [0...10]
       @board.setRandomPosition(new Character())
     @stage.add(@board)
 

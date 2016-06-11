@@ -1,3 +1,4 @@
+Grid = require('grid')
 Rect = require('./rect')
 Config = require('./config')
 base = [
@@ -7,10 +8,17 @@ base = [
   339, 342, 345, 348
 ]
 
-module.exports = class Character extends Rect
+module.exports = class Character extends Grid.Piece
+  for key, val of require('./shape')
+    @::[key] = val
+
+  for key, val of require('./tween')
+    @::[key] = val
+
   constructor: ->
-    id = Math.floor(Math.random() * base.length)
-    @shape = new createjs.Sprite(@_createSheet(id), "down")
+    sheetNum = Math.floor(Math.random() * base.length)
+    @shape = new createjs.Sprite(@_createSheet(sheetNum), "down")
+    super
 
   up: ->
     super()
