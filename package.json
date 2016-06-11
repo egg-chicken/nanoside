@@ -1,0 +1,27 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/egg-chicken/nanoside.git"
+  },
+  "name": "nanoside",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "./out/index.js",
+  "description": "this is test package",
+  "scripts": {
+    "lint": "coffeelint src",
+    "coffee": "coffee -b -o out/ -c src/*",
+    "bundle": "browserify out/index.js > out/bundle.js",
+    "build": "npm run coffee && npm run bundle",
+    "sync": "browser-sync start --config bs-config.js"
+  },
+  "dependencies": {
+    "browserify": "^13.0.1",
+    "coffee-script": "^1.10.0",
+    "grid": "github:egg-chicken/grid"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "coffeelint": "^1.15.7"
+  }
+}
