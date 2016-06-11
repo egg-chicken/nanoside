@@ -14,7 +14,7 @@ module.exports = class Stage
 
   frameLoop: (f)->
     tick = =>
-      f()
+      f?()
       @stage.update()
     createjs.Ticker.framerate = Config.FPS
     createjs.Ticker.addEventListener("tick", tick)

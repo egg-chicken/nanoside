@@ -1,12 +1,14 @@
 document.addEventListener "DOMContentLoaded", ->
   Stage = require('./stage')
   Rect = require('./rect')
+  Character = require('./character')
 
-  rect = new Rect("#ff0000")
-  i = 1
+  characters = []
+  for i in [0...40]
+    characters[i] = new Character("#ff0000")
+    characters[i].setPosition(x: i, y: 0)
 
   stage = new Stage()
-  stage.add(rect)
-  stage.frameLoop ->
-    i += 1
-    rect.setPosition(x: i, y: 1)
+  for i in [0...40]
+    stage.add(characters[i])
+  stage.frameLoop()
