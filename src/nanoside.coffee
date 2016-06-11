@@ -20,7 +20,7 @@ class Nanoside
 
   _init_test_characters: ->
     @characters = []
-    for i in [0...40]
+    for i in [0...300]
       p = Point.random(Config.BOARD_WIDTH, Config.BOARD_HEIGHT)
       @characters[i] = new Character()
       @characters[i].setPosition(p)
