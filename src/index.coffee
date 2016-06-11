@@ -12,4 +12,7 @@ document.addEventListener "DOMContentLoaded", ->
   stage = new Stage()
   for i in [0...40]
     stage.add(characters[i])
-  stage.frameLoop()
+
+  stage.turnLoop ->
+    for i in [0...40]
+      characters[i].down()

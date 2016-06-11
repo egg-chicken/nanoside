@@ -16,8 +16,16 @@ module.exports = class Stage
     tick = =>
       f?()
       @stage.update()
-    createjs.Ticker.framerate = Config.Frame_PER_SECOND
+    createjs.Ticker.framerate = Config.FRAME_PER_SECOND
     createjs.Ticker.addEventListener("tick", tick)
+
+  turnLoop: (f) ->
+    timer = 0
+    @frameLoop ->
+      timer += 1
+      if timer >= Config.FRAME_PER_TURN
+        timer = 0
+        f?()
 
   _fullsize: (canvas)->
     canvas.width = window.innerWidth
