@@ -2,7 +2,7 @@ Stage = require('./stage')
 Rect = require('./rect')
 Background = require('./background')
 Character = require('./character')
-Config = require('./config')
+Board = require('./board')
 Point = require('grid').Point
 
 class Nanoside
@@ -13,18 +13,17 @@ class Nanoside
     @_init_test_characters()
     @stage.update()
     @stage.turnLoop =>
-      for character in @characters
+      @board.each (_, point) =>
         dirs = ["up", "down", "left", "right"]
         dir = dirs[Math.floor(Math.random() * 4)]
-        character[dir]()
+        if @board.isAble(point, dir)
+          @board.command(point, dir)
 
   _init_test_characters: ->
-    @characters = []
-    for i in [0...300]
-      p = Point.random(Config.BOARD_WIDTH, Config.BOARD_HEIGHT)
-      @characters[i] = new Character()
-      @characters[i].setPosition(p)
-      @stage.add(@characters[i])
+    @board = new Board()
+    for i in [0...1]
+      @board.setRandomPosition(new Character())
+    @stage.add(@board)
 
   _init_test_rect: ->
     rect = new Rect("#BBBBBB")
