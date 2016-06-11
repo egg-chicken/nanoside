@@ -5,8 +5,6 @@ module.exports = class Rect
     @shape = new createjs.Shape()
     @image = document.getElementById(image_or_color)
     @color = image_or_color unless @image
-
-  draw: ->
     @_fill().drawRect(0, 0, Config.CELL_WIDTH, Config.CELL_WIDTH)
 
   setPosition: (p)->

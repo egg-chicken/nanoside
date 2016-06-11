@@ -3,7 +3,6 @@ document.addEventListener "DOMContentLoaded", ->
   Rect = require('./rect')
 
   rect = new Rect("#ff0000")
-  rect.draw()
   i = 1
 
   stage = new Stage()
