@@ -1,5 +1,6 @@
 Grid = require('grid')
 Rect = require('./rect')
+Tween = require('./tween')
 Config = require('./config')
 base = [
    99, 102, 105, 108,
@@ -10,15 +11,16 @@ base = [
 
 module.exports = class Character extends Grid.Piece
   @include(require('./shape'))
-  @include(require('./tween'))
 
   constructor: ->
     sheetNum = Math.floor(Math.random() * base.length)
     @shape = new createjs.Sprite(@_createSheet(sheetNum), "down")
     super
 
-  _play: (action)->
-    @shape.gotoAndPlay(action)
+  tweenPosition: (position) ->
+    dir = @getPosition().where(position)
+    @shape.gotoAndPlay(dir)
+    Tween.tweenPosition.apply(@, arguments)
 
   _createSheet: (id)->
     code = base[id]
