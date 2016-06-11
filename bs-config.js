@@ -3,5 +3,6 @@ module.exports = {
   "server": {
     baseDir: "./",
     index: "index.html"
-  }
+  },
+  "reloadDelay": 1000
 };
