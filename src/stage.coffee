@@ -5,6 +5,8 @@ module.exports = class Stage
     canvas = document.getElementById(Config.CANVAS_ID)
     @stage = new createjs.Stage(canvas)
     @_fullsize(canvas)
+    window.addEventListener 'resize', =>
+      @_fullsize(canvas)
 
   add: (rect)->
     @stage.addChild(rect.getShape())
