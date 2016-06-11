@@ -1,11 +1,9 @@
+Grid = require('grid')
 Config = require('./config')
 
-module.exports = class Rect
-  for key, val of require('./shape')
-    @::[key] = val
-
-  for key, val of require('./tween')
-    @::[key] = val
+module.exports = class Rect extends Grid.Piece
+  @include(require('./shape'))
+  @include(require('./tween'))
 
   constructor: (image_or_color)->
     @shape = new createjs.Shape()

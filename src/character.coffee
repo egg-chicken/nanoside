@@ -9,11 +9,8 @@ base = [
 ]
 
 module.exports = class Character extends Grid.Piece
-  for key, val of require('./shape')
-    @::[key] = val
-
-  for key, val of require('./tween')
-    @::[key] = val
+  @include(require('./shape'))
+  @include(require('./tween'))
 
   constructor: ->
     sheetNum = Math.floor(Math.random() * base.length)
