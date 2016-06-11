@@ -2,7 +2,9 @@ Config = require('./config')
 
 module.exports = class Stage
   constructor: ->
-    @stage = new createjs.Stage(Config.CANVAS_ID)
+    canvas = document.getElementById(Config.CANVAS_ID)
+    @stage = new createjs.Stage(canvas)
+    @_fullsize(canvas)
 
   add: (rect)->
     @stage.addChild(rect.getShape())
@@ -16,3 +18,7 @@ module.exports = class Stage
       @stage.update()
     createjs.Ticker.framerate = Config.FPS
     createjs.Ticker.addEventListener("tick", tick)
+
+  _fullsize: (canvas)->
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
