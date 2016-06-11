@@ -17,22 +17,6 @@ module.exports = class Character extends Grid.Piece
     @shape = new createjs.Sprite(@_createSheet(sheetNum), "down")
     super
 
-  up: ->
-    super()
-    @_play("up")
-
-  down: ->
-    super()
-    @_play("down")
-
-  left: ->
-    super()
-    @_play("left")
-
-  right: ->
-    super()
-    @_play("right")
-
   _play: (action)->
     @shape.gotoAndPlay(action)
 

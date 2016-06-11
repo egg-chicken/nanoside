@@ -11,9 +11,4 @@ module.exports = {
 
   getShape: ->
     @shape
-
-  up:    -> @tweenPosition(@position.up())
-  down:  -> @tweenPosition(@position.down())
-  left:  -> @tweenPosition(@position.left())
-  right: -> @tweenPosition(@position.right())
 }

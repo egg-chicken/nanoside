@@ -21,5 +21,4 @@ module.exports = class Board extends Grid.Board
     else
       @shape.addChild(shape)
       character.setPosition(position)
-
-    super(position, character)
+    super
