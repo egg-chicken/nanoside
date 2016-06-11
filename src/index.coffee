@@ -15,4 +15,6 @@ document.addEventListener "DOMContentLoaded", ->
 
   stage.turnLoop ->
     for i in [0...40]
-      characters[i].down()
+      dirs = ["up", "down", "left", "right"]
+      dir = dirs[Math.floor(Math.random() * 4)]
+      characters[i][dir]()

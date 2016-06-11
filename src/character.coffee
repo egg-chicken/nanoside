@@ -12,7 +12,23 @@ module.exports = class Character extends Rect
     id = Math.floor(Math.random() * base.length)
     @shape = new createjs.Sprite(@_createSheet(id), "down")
 
-  play: (action)->
+  up: ->
+    super()
+    @_play("up")
+
+  down: ->
+    super()
+    @_play("down")
+
+  left: ->
+    super()
+    @_play("left")
+
+  right: ->
+    super()
+    @_play("right")
+
+  _play: (action)->
     @shape.gotoAndPlay(action)
 
   _createSheet: (id)->
