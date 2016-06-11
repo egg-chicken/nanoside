@@ -12,11 +12,11 @@ module.exports = class Stage
   update: ->
     @stage.update()
 
-  frameLoop: (f)->
+  frameLoop: (f) ->
     tick = =>
       f?()
       @stage.update()
-    createjs.Ticker.framerate = Config.FPS
+    createjs.Ticker.framerate = Config.Frame_PER_SECOND
     createjs.Ticker.addEventListener("tick", tick)
 
   _fullsize: (canvas)->

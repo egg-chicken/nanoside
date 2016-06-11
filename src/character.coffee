@@ -21,7 +21,7 @@ module.exports = class Character extends Rect
       images: [Config.Sprite.PATH]
       frames: { width: Config.CELL_WIDTH, height: Config.CELL_WIDTH }
       animations:
-        down:  { frames: [code + 0,  code + 1,  code + 2,  code + 1],  speed: Config.Sprite.FPS }
-        up:    { frames: [code + 16, code + 17, code + 18, code + 17], speed: Config.Sprite.FPS }
-        left:  { frames: [code + 32, code + 33, code + 34, code + 33], speed: Config.Sprite.FPS }
-        right: { frames: [code + 48, code + 49, code + 50, code + 49], speed: Config.Sprite.FPS }
+        down:  { frames: [code + 0,  code + 1,  code + 2,  code + 1],  speed: Config.Sprite.FRAME_SPEED }
+        up:    { frames: [code + 16, code + 17, code + 18, code + 17], speed: Config.Sprite.FRAME_SPEED }
+        left:  { frames: [code + 32, code + 33, code + 34, code + 33], speed: Config.Sprite.FRAME_SPEED }
+        right: { frames: [code + 48, code + 49, code + 50, code + 49], speed: Config.Sprite.FRAME_SPEED }
