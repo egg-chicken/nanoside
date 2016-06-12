@@ -15,14 +15,15 @@ class Nanoside
     @stage.update()
     @stage.turnLoop =>
       @board.each (_, point) =>
-        action = @strategy.plan(point)
+        action = @strategy.aggressive(point)
         @board.command(point, action) if action
 
   _init_test_characters: ->
     @board = new Board()
     @strategy = new Strategy(@board)
     for i in [0...10]
-      @board.setRandomPosition(new Character())
+      @board.setRandomPosition(new Character(teamCode: 1))
+    @board.setRandomPosition(new Character(teamCode: 2))
     @stage.add(@board)
 
   _init_test_rect: ->
