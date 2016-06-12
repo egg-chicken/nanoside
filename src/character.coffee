@@ -24,6 +24,7 @@ module.exports = class Character extends Grid.Piece
 
   damage: ->
     @shape.gotoAndStop('defeated')
+    super
 
   _createSheet: (id)->
     code = base[id]

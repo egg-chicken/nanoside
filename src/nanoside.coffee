@@ -23,7 +23,7 @@ class Nanoside
     @strategy = new Strategy(@board)
     for i in [0...10]
       @board.setRandomPosition(new Character(teamCode: 1))
-    @board.setRandomPosition(new Character(teamCode: 2))
+      @board.setRandomPosition(new Character(teamCode: 2))
     @stage.add(@board)
 
   _init_test_rect: ->
