@@ -22,6 +22,9 @@ module.exports = class Character extends Grid.Piece
     @shape.gotoAndPlay(dir)
     Tween.tweenPosition.apply(@, arguments)
 
+  damage: ->
+    @shape.gotoAndStop('defeated')
+
   _createSheet: (id)->
     code = base[id]
     new createjs.SpriteSheet
@@ -32,3 +35,4 @@ module.exports = class Character extends Grid.Piece
         up:    { frames: [code + 16, code + 17, code + 18, code + 17], speed: Config.Sprite.FRAME_SPEED }
         left:  { frames: [code + 32, code + 33, code + 34, code + 33], speed: Config.Sprite.FRAME_SPEED }
         right: { frames: [code + 48, code + 49, code + 50, code + 49], speed: Config.Sprite.FRAME_SPEED }
+        defeated: code - 16
