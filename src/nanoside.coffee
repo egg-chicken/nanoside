@@ -4,6 +4,7 @@ Background = require('./background')
 Character = require('./character')
 Board = require('./board')
 Point = require('grid').Point
+Strategy = require('grid').Strategy
 
 class Nanoside
   constructor: ->
@@ -14,13 +15,12 @@ class Nanoside
     @stage.update()
     @stage.turnLoop =>
       @board.each (_, point) =>
-        dirs = ["up", "down", "left", "right"]
-        dir = dirs[Math.floor(Math.random() * 4)]
-        if @board.isAble(point, dir)
-          @board.command(point, dir)
+        action = @strategy.plan(point)
+        @board.command(point, action) if action
 
   _init_test_characters: ->
     @board = new Board()
+    @strategy = new Strategy(@board)
     for i in [0...10]
       @board.setRandomPosition(new Character())
     @stage.add(@board)
