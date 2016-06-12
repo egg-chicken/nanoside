@@ -1,5 +1,4 @@
 Grid = require('grid')
-Rect = require('./rect')
 Tween = require('./tween')
 Config = require('./config')
 base = [

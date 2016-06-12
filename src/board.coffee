@@ -1,5 +1,4 @@
 Grid = require('grid')
-rect = require('./rect')
 Config = require('./config')
 
 module.exports = class Board extends Grid.Board
