@@ -10,7 +10,7 @@
   "description": "this is test package",
   "scripts": {
     "lint": "coffeelint src",
-    "coffee": "coffee -b -o out/ -c src/*",
+    "coffee": "coffee -b -o out/ -c src/",
     "bundle": "browserify out/index.js > out/bundle.js",
     "build": "npm run coffee && npm run bundle",
     "sync": "browser-sync start --config bs-config.js"
