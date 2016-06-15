@@ -1,6 +1,7 @@
 Grid = require('grid')
 Tween = require('./tween')
 Config = require('./config')
+Flag = require('./flag')
 base = [
    99, 102, 105, 108,
   179, 182, 185, 188,
@@ -12,17 +13,21 @@ module.exports = class Character extends Grid.Piece
   @include(require('./shape'))
 
   constructor: ->
-    sheetNum = Math.floor(Math.random() * base.length)
-    @shape = new createjs.Sprite(@_createSheet(sheetNum), "down")
     super
+    sheetNum = Math.floor(Math.random() * base.length)
+    @shape = new createjs.Container()
+    @sprite = new createjs.Sprite(@_createSheet(sheetNum), "down")
+    @flag   = new Flag(@teamCode)
+    @shape.addChild(@sprite)
+    @shape.addChild(@flag.getShape())
 
   tweenPosition: (position) ->
     dir = @getPosition().where(position)
-    @shape.gotoAndPlay(dir)
+    @sprite.gotoAndPlay(dir)
     Tween.tweenPosition.apply(@, arguments)
 
   damage: ->
-    @shape.gotoAndStop('defeated')
+    @sprite.gotoAndStop('defeated')
     super
 
   _createSheet: (id)->
