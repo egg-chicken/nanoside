@@ -9,7 +9,7 @@ module.exports = class Background
     @shape
 
   _drawLine: ->
-    @shape.graphics.beginStroke("#AAAAAA")
+    @shape.graphics.beginStroke("#CCCCCC")
     @_drawHorizontal()
     @_drawVertical()
     @shape.graphics.endStroke()
