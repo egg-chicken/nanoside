@@ -27,8 +27,9 @@ module.exports = class Character extends Grid.Piece
     Tween.tweenPosition.apply(@, arguments)
 
   damage: ->
-    @sprite.gotoAndStop('defeated')
     super
+    if @isDead()
+      @sprite.gotoAndStop('defeated')
 
   _createSheet: (id)->
     code = base[id]
