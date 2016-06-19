@@ -13,7 +13,7 @@ module.exports = class Background
     @container
 
   _drawLine: ->
-    @shape.graphics.beginStroke("#CCCCCC")
+    @shape.graphics.setStrokeStyle(2, 'square').beginStroke(Config.Background.COLOR)
     @_drawHorizontal()
     @_drawVertical()
     @shape.graphics.endStroke()

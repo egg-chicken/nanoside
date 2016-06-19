@@ -10,4 +10,5 @@ module.exports = {
     PATH: 'img/characters.png'
   Background:
     PATH: 'img/background.png'
+    COLOR: 'white'
 }

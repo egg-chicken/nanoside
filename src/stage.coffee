@@ -4,9 +4,7 @@ module.exports = class Stage
   constructor: ->
     canvas = document.getElementById(Config.CANVAS_ID)
     @stage = new createjs.Stage(canvas)
-    @_fullsize(canvas)
-    window.addEventListener 'resize', =>
-      @_fullsize(canvas)
+    @_boardsize(canvas)
 
   add: (rect)->
     @stage.addChild(rect.getShape())
@@ -40,3 +38,7 @@ module.exports = class Stage
   _fullsize: (canvas)->
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+
+  _boardsize: (canvas)->
+    canvas.width = Config.BOARD_WIDTH * Config.CELL_WIDTH
+    canvas.height = Config.BOARD_HEIGHT * Config.CELL_WIDTH
