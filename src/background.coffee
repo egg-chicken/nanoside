@@ -2,11 +2,15 @@ Config = require('./config')
 
 module.exports = class Background
   constructor: ->
+    @container = new createjs.Container()
+    @img = new createjs.Bitmap(Config.Background.PATH)
     @shape = new createjs.Shape()
+    @container.addChild(@img)
+    @container.addChild(@shape)
     @_drawLine()
 
   getShape: ->
-    @shape
+    @container
 
   _drawLine: ->
     @shape.graphics.beginStroke("#CCCCCC")

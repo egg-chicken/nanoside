@@ -8,4 +8,6 @@ module.exports = {
   Sprite:
     FRAME_SPEED: 1/20
     PATH: 'img/characters.png'
+  Background:
+    PATH: 'img/background.png'
 }
