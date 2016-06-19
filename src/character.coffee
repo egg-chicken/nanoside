@@ -12,11 +12,10 @@ base = [
 module.exports = class Character extends Grid.Piece
   @include(require('./shape'))
 
-  constructor: ->
+  constructor: (options)->
     super
-    sheetNum = Math.floor(Math.random() * base.length)
     @shape = new createjs.Container()
-    @sprite = new createjs.Sprite(@_createSheet(sheetNum), "down")
+    @sprite = new createjs.Sprite(@_createSheet(options.spriteNumber), "down")
     @flag   = new Flag(@teamCode)
     @shape.addChild(@sprite)
     @shape.addChild(@flag.getShape())
@@ -31,8 +30,8 @@ module.exports = class Character extends Grid.Piece
     if @isDead()
       @sprite.gotoAndStop('defeated')
 
-  _createSheet: (id)->
-    code = base[id]
+  _createSheet: (spriteNumber)->
+    code = base[spriteNumber]
     new createjs.SpriteSheet
       images: [Config.Sprite.PATH]
       frames: { width: Config.CELL_WIDTH, height: Config.CELL_WIDTH }

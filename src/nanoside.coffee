@@ -1,7 +1,7 @@
 Stage = require('./stage')
 Rect = require('./rect')
 Background = require('./background')
-Character = require('./character')
+CharacterFactory = require('./character_factory')
 Board = require('./board')
 Point = require('grid').Point
 Strategy = require('grid').Strategy
@@ -21,8 +21,8 @@ class Nanoside
     @board = new Board()
     @strategy = new Strategy(@board)
     for i in [0...10]
-      @board.setRandomPosition(new Character(teamCode: 1))
-      @board.setRandomPosition(new Character(teamCode: 2))
+      @board.setRandomPosition(CharacterFactory.create(0, teamCode: 1))
+      @board.setRandomPosition(CharacterFactory.create(1, teamCode: 2))
     @stage.add(@board)
 
   _init_background: ->
