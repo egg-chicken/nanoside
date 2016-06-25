@@ -1,9 +1,9 @@
 Stage = require('./stage')
 Rect = require('./rect')
 Background = require('./background')
-CharacterFactory = require('./character_factory')
 Board = require('./board')
-Point = require('grid').Point
+CharacterFactory = require('./character_factory')
+CharacterPreset = require('./character_preset')
 Strategy = require('grid').Strategy
 
 class Nanoside
@@ -20,9 +20,13 @@ class Nanoside
   _init_test_characters: ->
     @board = new Board()
     @strategy = new Strategy(@board)
+    friends = new CharacterPreset(teamCode: 1)
+    enemies = new CharacterPreset(teamCode: 2)
     for i in [0...10]
-      @board.setRandomPosition(CharacterFactory.create(0, teamCode: 1))
-      @board.setRandomPosition(CharacterFactory.create(1, teamCode: 2))
+      friends.add(x: i, y: i, CharacterFactory.create(0))
+      enemies.add(x: i, y: i, CharacterFactory.create(1))
+    friends.apply(@board)
+    enemies.apply(@board, x: 20, y: 0)
     @stage.add(@board)
 
   _init_background: ->
