@@ -24,13 +24,17 @@ module.exports = class Stage
     createjs.Ticker.framerate = Config.FRAME_PER_SECOND
     createjs.Ticker.addEventListener("tick", tick)
 
-  turnLoop: (f) ->
+  turnLoop: ->
     timer = 0
-    @frameLoop ->
+    @frameLoop =>
       timer += 1
       if timer >= Config.FRAME_PER_TURN
         timer = 0
-        f?()
+        @turn?()
+
+  on: (event, f)->
+    switch event
+      when 'turn' then @turn = f
 
   _stop: ->
     createjs.Ticker.removeAllEventListeners("tick")

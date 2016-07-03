@@ -2,17 +2,25 @@ Stage = require('./stage')
 Rect = require('./rect')
 Background = require('./background')
 Board = require('./board')
+Caption = require('./caption')
 CharacterFactory = require('./character_factory')
 CharacterPreset = require('./character_preset')
 Strategy = require('grid').Strategy
+
 
 class Nanoside
   constructor: ->
     @stage = new Stage()
     @_init_background()
     @_init_test_characters()
+    @_init_caption()
     @stage.update()
-    @stage.turnLoop =>
+    @stage.turnLoop()
+    @caption.on('complete', => @_init_turn())
+    @caption.play()
+
+  _init_turn: ->
+    @stage.on 'turn', =>
       @board.each (_, point) =>
         action = @strategy.aggressive(point)
         @board.command(point, action) if action
@@ -32,5 +40,9 @@ class Nanoside
   _init_background: ->
     background = new Background()
     @stage.add(background)
+
+  _init_caption: ->
+    @caption = new Caption()
+    @stage.add(@caption)
 
 module.exports = new Nanoside()
