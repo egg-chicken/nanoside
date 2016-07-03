@@ -17,7 +17,7 @@ class Nanoside
     @stage.update()
     @stage.turnLoop()
     @caption.on('complete', => @_init_turn())
-    @caption.play()
+    @caption.play('GAME START')
 
   _init_turn: ->
     @stage.on 'turn', =>

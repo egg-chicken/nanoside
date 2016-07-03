@@ -3,27 +3,46 @@ Config = require('./config')
 
 module.exports = class Caption
   constructor: ->
-    canvas_width = Config.BOARD_WIDTH * Config.CELL_WIDTH
-    canvas_height = Config.BOARD_HEIGHT * Config.CELL_WIDTH
-
     @container = new createjs.Container()
-    @shape = new createjs.Shape()
-    @shape.graphics.beginFill("#000").drawRect(0, 0, canvas_width, canvas_height)
-    @container.addChild(@shape)
+    @container.addChild(@_initBlack())
+    @container.addChild(@_initText())
 
   getShape: ->
     @container
 
-  on: (event, f)->
+  on: (event, f) ->
     switch event
       when 'complete' then @onComplete = f
 
-  play: ->
+  play: (message) ->
+    @text.set(@_buildTextOptions(text: message))
+
     _onComplete = =>
       @container.alpha = 1
       @container.visible = false
       @onComplete()
 
     createjs.Tween.get(@container)
+      .to(alpha: 1, 1000)
       .to(alpha: 0, 1000)
       .call(_onComplete)
+
+  _initBlack: ->
+    canvasWidth = Config.BOARD_WIDTH * Config.CELL_WIDTH
+    canvasHeight = Config.BOARD_HEIGHT * Config.CELL_WIDTH
+    black = new createjs.Shape()
+    black.graphics.beginFill('#000').drawRect(0, 0, canvasWidth, canvasHeight)
+    black
+
+  _initText: ->
+    @text = new createjs.Text()
+
+  _buildTextOptions: (options)->
+    base =
+      y: (Config.BOARD_HEIGHT * Config.CELL_WIDTH)/2
+      x: (Config.BOARD_WIDTH * Config.CELL_WIDTH)/2
+      textAlign: 'center'
+      textBaseline: 'middle'
+      color: '#fff'
+      font: "#{Config.CELL_WIDTH}px Courier"
+    Object.assign(base, options)
