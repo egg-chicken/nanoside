@@ -4,10 +4,14 @@ module.exports = class Stage
   constructor: ->
     canvas = document.getElementById(Config.CANVAS_ID)
     @stage = new createjs.Stage(canvas)
+    @stage.enableMouseOver()
     @_boardsize(canvas)
 
   add: (rect)->
     @stage.addChild(rect.getShape())
+
+  removeAll: ->
+    @stage.removeAllChildren()
 
   update: ->
     @stage.update()

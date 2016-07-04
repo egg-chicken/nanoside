@@ -6,7 +6,7 @@ Caption = require('./caption')
 CharacterFactory = require('./character_factory')
 CharacterPreset = require('./character_preset')
 Strategy = require('grid').Strategy
-
+Button = require('./button')
 
 class Nanoside
   constructor: ->
@@ -17,7 +17,6 @@ class Nanoside
     @stage.update()
     @stage.turnLoop()
     @caption.on('complete', => @_init_turn())
-    @caption.play('GAME START')
 
   _init_turn: ->
     @stage.on 'turn', =>
@@ -42,7 +41,13 @@ class Nanoside
     @stage.add(background)
 
   _init_caption: ->
+    button = new Button('GAME START')
+    button.on 'click', =>
+      button.hide()
+      @caption.play('nanoside')
     @caption = new Caption()
     @stage.add(@caption)
+    @stage.add(button)
+    button.play()
 
 module.exports = new Nanoside()
