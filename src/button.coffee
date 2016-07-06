@@ -18,7 +18,7 @@ module.exports = class Button
 
   on: (event, f) ->
     switch event
-      when 'click' then @container.addEventListener('click', f)
+      when 'click' then @container.addEventListener('click', => f(@))
 
   play: ->
     params = { alpha: 1, x: 0 }
@@ -33,6 +33,11 @@ module.exports = class Button
   hideStatic: ->
     @hide(alpha: 0)
 
+  getHeight: ->
+    HEIGHT
+
+  getText: ->
+    @text.text
 
   _remove: ->
     @container.removeAllEventListeners()
