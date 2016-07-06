@@ -24,8 +24,20 @@ module.exports = class Button
     params = { alpha: 1, x: 0 }
     createjs.Tween.get(@container).to(params, 1000, createjs.Ease.quintOut)
 
-  hide: ->
-    createjs.Tween.get(@container).to(alpha: 0, 1000, createjs.Ease.quintOut)
+  hide: (params)->
+    params ||= { alpha: 0, x: Config.CELL_WIDTH }
+    createjs.Tween.get(@container)
+      .to(params, 1000, createjs.Ease.quintOut)
+      .call( => @_remove())
+
+  hideStatic: ->
+    @hide(alpha: 0)
+
+
+  _remove: ->
+    @container.removeAllEventListeners()
+    @container.removeAllChildren()
+    @container.parent.removeChild(@container)
 
   _initHitBox: ->
     box = new createjs.Shape()
