@@ -4,6 +4,7 @@ module.exports = class Stage
   constructor: ->
     canvas = document.getElementById(Config.CANVAS_ID)
     @stage = new createjs.Stage(canvas)
+    @stage.name = "stage"
     @stage.enableMouseOver()
     @_boardsize(canvas)
 
@@ -39,6 +40,17 @@ module.exports = class Stage
   on: (event, f)->
     switch event
       when 'turn' then @turn = f
+
+  # デバッグ用に stage に属する DisplayObject を出力する
+  getDisplayObjects: (current = @stage)->
+    result = [current]
+    if current.children
+      for child in current.children
+        result.push.apply(result, @getDisplayObjects(child))
+    result
+
+  getDisplayObjectNames: (root)->
+    @getDisplayObjects(root).map((o) -> o.name || o.id )
 
   _stop: ->
     createjs.Ticker.removeAllEventListeners("tick")

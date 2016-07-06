@@ -6,6 +6,7 @@ module.exports = class Button
 
   constructor: (message) ->
     @container = new createjs.Container()
+    @container.name = 'button.container'
     @container.cursor = 'pointer'
     @container.addChild(@_initText(message))
     @container.hitArea = @_initHitBox()
