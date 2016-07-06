@@ -7,8 +7,8 @@ module.exports = class Button
   constructor: (message) ->
     @container = new createjs.Container()
     @container.cursor = 'pointer'
-    @container.addChild(@_initBlack())
     @container.addChild(@_initText(message))
+    @container.hitArea = @_initHitBox()
     @container.alpha = 0
     @container.x = Config.CELL_WIDTH
 
@@ -26,11 +26,10 @@ module.exports = class Button
   hide: ->
     createjs.Tween.get(@container).to(alpha: 0, 1000, createjs.Ease.quintOut)
 
-  _initBlack: ->
-    black = new createjs.Shape()
-    black.graphics.beginFill('#000').drawRect(0, 0, WIDTH, HEIGHT)
-    black.alpha = 0.8
-    black
+  _initHitBox: ->
+    box = new createjs.Shape()
+    box.graphics.beginFill('#000').drawRect(0, 0, WIDTH, HEIGHT)
+    box
 
   _initText: (message)->
     @text = new createjs.Text()
