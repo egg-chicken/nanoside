@@ -1,7 +1,7 @@
 module.exports = {
-  "files": ["index.html", "out/bundle.js"],
+  "files": ["out/bundle.js"],
   "server": {
-    baseDir: "./",
+    baseDir: "out",
     index: "index.html"
   },
   "reloadDelay": 1000
