@@ -1,31 +1,42 @@
 Config = require('./config')
 
 module.exports = class Background
-  constructor: ->
+  constructor: (colorOrImage = Config.Background.PATH, grid = false) ->
     @container = new createjs.Container()
-    @img = new createjs.Bitmap(Config.Background.PATH)
-    @shape = new createjs.Shape()
-    @container.addChild(@img)
-    @container.addChild(@shape)
-    @_drawLine()
+    @container.addChild(@_initBase(colorOrImage))
+    @container.addChild(@_initGrid()) if grid
 
   getShape: ->
     @container
 
-  _drawLine: ->
-    @shape.graphics.setStrokeStyle(2, 'square').beginStroke(Config.Background.COLOR)
-    @_drawHorizontal()
-    @_drawVertical()
-    @shape.graphics.endStroke()
+  _initBase: (colorOrImage) ->
+    if colorOrImage.startsWith('#')
+      width = Config.BOARD_WIDTH * Config.CELL_WIDTH
+      height = Config.BOARD_HEIGHT * Config.CELL_WIDTH
+      shape = new createjs.Shape()
+      shape.graphics.beginFill(colorOrImage).drawRect(0, 0, width, height)
+      shape
+    else
+      new createjs.Bitmap(Config.Background[colorOrImage])
 
-  _drawHorizontal: ->
+  _initGrid: () ->
+    grid = new createjs.Shape()
+    grid.graphics
+      .setStrokeStyle(2, 'square')
+      .beginStroke(Config.Background.GRID_COLOR)
+    @_drawHorizontal(grid)
+    @_drawVertical(grid)
+    grid.graphics.endStroke()
+    grid
+
+  _drawHorizontal: (grid) ->
     for i in [0...Config.BOARD_HEIGHT]
       h = i * Config.CELL_WIDTH
       l = Config.BOARD_WIDTH * Config.CELL_WIDTH
-      @shape.graphics.moveTo(0, h).lineTo(l, h)
+      grid.graphics.moveTo(0, h).lineTo(l, h)
 
-  _drawVertical: ->
+  _drawVertical: (grid) ->
     for j in [0...Config.BOARD_WIDTH]
       w = j * Config.CELL_WIDTH
       l = Config.BOARD_HEIGHT * Config.CELL_WIDTH
-      @shape.graphics.moveTo(w, 0).lineTo(w, l)
+      grid.graphics.moveTo(w, 0).lineTo(w, l)
