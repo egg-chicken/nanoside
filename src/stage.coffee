@@ -9,7 +9,11 @@ module.exports = class Stage
     @_boardsize(canvas)
 
   add: (rect)->
-    @stage.addChild(rect.getShape())
+    if Array.isArray(rect)
+      for i in rect
+        @stage.addChild(i.getShape())
+    else
+      @stage.addChild(rect.getShape())
 
   removeAll: ->
     @stage.removeAllChildren()
