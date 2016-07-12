@@ -14,7 +14,7 @@ class Nanoside
     @selection.play()
 
   _initBackground: ->
-    @background = new Background('#000')
+    @background = new Background(color: '#000', alpha: 0.5)
 
   _initSelection: ->
     @selection = new Selection(["assembly", "battle"])

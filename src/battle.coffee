@@ -36,7 +36,7 @@ module.exports = class Battle
     @stage.add(@board)
 
   _init_background: ->
-    background = new Background('BATTLE', true)
+    background = new Background(color: '#000', alpha: 0.5)
     @stage.add(background)
 
   _init_caption: ->
