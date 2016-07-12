@@ -7,3 +7,8 @@
     margin: auto;
     image-rendering: pixelated;
 }
+
+body {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHUlEQVQYV2NkgID/UBonxUiMIpDuUYV4g5Lo4AEApT4KAYfXdgoAAAAASUVORK5CYII=) repeat;
+
+}
