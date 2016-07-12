@@ -1,7 +1,8 @@
 Stage = require('./stage')
 Selection = require('./selection')
 Background = require('./background')
-Buttle = require('./buttle')
+Battle = require('./battle')
+Assembly = require('./assembly')
 
 class Nanoside
   constructor: ->
@@ -16,10 +17,11 @@ class Nanoside
     @background = new Background('#000')
 
   _initSelection: ->
-    @selection = new Selection(["shop", "buttle"])
+    @selection = new Selection(["assembly", "battle"])
     @selection.on 'select', (selected) =>
       switch selected
-        when 'buttle' then new Buttle()
+        when 'battle'   then new Battle()
+        when 'assembly' then new Assembly()
       @stage.removeAll()
     @selection
 

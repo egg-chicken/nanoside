@@ -6,7 +6,7 @@ CharacterFactory = require('./character_factory')
 CharacterPreset = require('./character_preset')
 Strategy = require('grid').Strategy
 
-module.exports = class Buttle
+module.exports = class Battle
   constructor: ->
     @stage = new Stage()
     @_init_background()
@@ -15,7 +15,7 @@ module.exports = class Buttle
     @stage.update()
     @stage.turnLoop()
     @caption.on('complete', => @_init_turn())
-    @caption.play('BUTTLE')
+    @caption.play('BATTLE')
 
   _init_turn: ->
     @stage.on 'turn', =>
@@ -36,7 +36,7 @@ module.exports = class Buttle
     @stage.add(@board)
 
   _init_background: ->
-    background = new Background('BUTTLE', true)
+    background = new Background('BATTLE', true)
     @stage.add(background)
 
   _init_caption: ->

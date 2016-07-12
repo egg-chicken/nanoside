@@ -9,6 +9,7 @@ module.exports = {
     FRAME_SPEED: 1/20
     PATH: 'img/characters.png'
   Background:
-    BUTTLE: 'img/background.png'
+    BATTLE: 'img/background.png'
+    ASSEMBLY: 'img/assembly.png'
     GRID_COLOR: 'white'
 }
