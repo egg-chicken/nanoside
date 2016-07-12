@@ -12,4 +12,7 @@ module.exports = {
     BATTLE: 'img/background.png'
     ASSEMBLY: 'img/assembly.png'
     GRID_COLOR: 'white'
+  Font:
+    MIDDLE_SIZE: '16px'
+    FAMILY: 'Courier'
 }

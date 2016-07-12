@@ -58,5 +58,5 @@ module.exports = class Button
       textAlign: 'center'
       textBaseline: 'middle'
       color: '#fff'
-      font: "#{Config.CELL_WIDTH}px Courier"
+      font: "#{Config.Font.MIDDLE_SIZE} #{Config.Font.FAMILY}"
     @text

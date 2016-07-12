@@ -44,5 +44,5 @@ module.exports = class Caption
       textAlign: 'center'
       textBaseline: 'middle'
       color: '#fff'
-      font: "#{Config.CELL_WIDTH}px Courier"
+      font: "#{Config.Font.MIDDLE_SIZE} #{Config.Font.FAMILY}"
     Object.assign(base, options)
