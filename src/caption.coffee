@@ -20,7 +20,7 @@ module.exports = class Caption
     _onComplete = =>
       @container.alpha = 1
       @container.visible = false
-      @onComplete()
+      @onComplete?()
 
     createjs.Tween.get(@container)
       .to(alpha: 1, 1000)
