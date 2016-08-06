@@ -14,7 +14,7 @@ module.exports = class Battle
     @stage.update()
     @stage.turnLoop()
     @caption.on('complete', => @_init_turn())
-    @caption.play('BATTLE')
+    @caption.play('nanoside')
 
   _init_turn: ->
     @stage.on 'turn', =>
