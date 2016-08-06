@@ -2,12 +2,6 @@ Grid = require('grid')
 Tween = require('./tween')
 Config = require('./config')
 Flag = require('./flag')
-base = [
-   99, 102, 105, 108,
-  179, 182, 185, 188,
-  259, 262, 265, 268,
-  339, 342, 345, 348
-]
 
 module.exports = class Character extends Grid.Piece
   @include(require('./shape'))
@@ -22,22 +16,24 @@ module.exports = class Character extends Grid.Piece
 
   tweenPosition: (position) ->
     dir = @getPosition().where(position)
-    @sprite.gotoAndPlay(dir)
+    if @currentDir != dir
+      @sprite.gotoAndPlay(dir)
+      @currentDir = dir
     Tween.tweenPosition.apply(@, arguments)
 
   damage: ->
     super
     if @isDead()
-      @sprite.gotoAndStop('defeated')
+      @sprite.gotoAndPlay('defeated')
 
   _createSheet: (spriteNumber)->
-    code = base[spriteNumber]
     new createjs.SpriteSheet
-      images: [Config.Sprite.PATH]
+      images: ["#{Config.Sprite.PATH}/001.png"]
       frames: { width: Config.CELL_WIDTH, height: Config.CELL_WIDTH }
       animations:
-        down:  { frames: [code + 0,  code + 1,  code + 2,  code + 1],  speed: Config.Sprite.FRAME_SPEED }
-        up:    { frames: [code + 16, code + 17, code + 18, code + 17], speed: Config.Sprite.FRAME_SPEED }
-        left:  { frames: [code + 32, code + 33, code + 34, code + 33], speed: Config.Sprite.FRAME_SPEED }
-        right: { frames: [code + 48, code + 49, code + 50, code + 49], speed: Config.Sprite.FRAME_SPEED }
-        defeated: code - 16
+        down:      [0,   3, 'down', Config.Sprite.FRAME_SPEED]
+        up:        [4,   7, 'up', Config.Sprite.FRAME_SPEED]
+        left:      [8,  11, 'left', Config.Sprite.FRAME_SPEED]
+        right:     [12, 15, 'right', Config.Sprite.FRAME_SPEED]
+        defeated:  [16, 19, 'defeated2', Config.Sprite.FRAME_SPEED]
+        defeated2: 19

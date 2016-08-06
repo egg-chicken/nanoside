@@ -7,7 +7,7 @@ module.exports = {
   CELL_WIDTH: 16
   Sprite:
     FRAME_SPEED: 1/20
-    PATH: 'img/characters.png'
+    PATH: 'img/characters/'
   Background:
     BATTLE: 'img/background.png'
     ASSEMBLY: 'img/assembly.png'
