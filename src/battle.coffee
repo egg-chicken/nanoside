@@ -2,7 +2,6 @@ Stage = require('./stage')
 Background = require('./background')
 Board = require('./board')
 Caption = require('./caption')
-CharacterFactory = require('./character_factory')
 CharacterPreset = require('./character_preset')
 Strategy = require('grid').Strategy
 
@@ -26,11 +25,8 @@ module.exports = class Battle
   _initBoard: ->
     @board = new Board()
     @strategy = new Strategy(@board)
-    friends = new CharacterPreset(teamCode: 1)
-    enemies = new CharacterPreset(teamCode: 2)
-    for i in [0...10]
-      friends.add(x: i, y: i, CharacterFactory.create(0))
-      enemies.add(x: i, y: i, CharacterFactory.create(1))
+    friends = CharacterPreset.wing(teamCode: 1, characterCode: 0)
+    enemies = CharacterPreset.wing(teamCode: 2, characterCode: 1, reverse: true)
     friends.apply(@board)
     enemies.apply(@board, x: 20, y: 0)
     @board

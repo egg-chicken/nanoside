@@ -1,4 +1,5 @@
 Point = require('grid').Point
+CharacterFactory = require('./character_factory')
 
 module.exports = class CharacterPreset
   constructor: (options)->
@@ -21,3 +22,11 @@ module.exports = class CharacterPreset
     @each (position, member) ->
       position = position.shift(offset.x, offset.y) if offset
       board.set(position, member)
+
+  # options: characterCode, teamCode
+  @wing: (options) ->
+    preset = new CharacterPreset(options)
+    position = (i) -> {x: i, y: if options.reverse then 9-i else i }
+    for i in [0...10]
+      preset.add(position(i), CharacterFactory.create(options.characterCode))
+    preset
