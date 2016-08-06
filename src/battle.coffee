@@ -9,9 +9,9 @@ Strategy = require('grid').Strategy
 module.exports = class Battle
   constructor: ->
     @stage = new Stage()
-    @_init_background()
-    @_init_test_characters()
-    @_init_caption()
+    @stage.add(@_initBackground())
+    @stage.add(@_initBoard())
+    @stage.add(@_initCaption())
     @stage.update()
     @stage.turnLoop()
     @caption.on('complete', => @_init_turn())
@@ -23,7 +23,7 @@ module.exports = class Battle
         action = @strategy.aggressive(point)
         @board.command(point, action) if action
 
-  _init_test_characters: ->
+  _initBoard: ->
     @board = new Board()
     @strategy = new Strategy(@board)
     friends = new CharacterPreset(teamCode: 1)
@@ -33,12 +33,10 @@ module.exports = class Battle
       enemies.add(x: i, y: i, CharacterFactory.create(1))
     friends.apply(@board)
     enemies.apply(@board, x: 20, y: 0)
-    @stage.add(@board)
+    @board
 
-  _init_background: ->
-    background = new Background(color: '#000', alpha: 0.5)
-    @stage.add(background)
+  _initBackground: ->
+    new Background(color: '#000', alpha: 0.5)
 
-  _init_caption: ->
+  _initCaption: ->
     @caption = new Caption()
-    @stage.add(@caption)
