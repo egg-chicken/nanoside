@@ -9,7 +9,7 @@ module.exports = class Character extends Grid.Piece
   constructor: (options)->
     super
     @shape = new createjs.Container()
-    @sprite = new createjs.Sprite(@_createSheet(options.spriteNumber), "down")
+    @sprite = new createjs.Sprite(@_createSheet(options.spriteCode), "down")
     @flag   = new Flag(@teamCode)
     @shape.addChild(@sprite)
     @shape.addChild(@flag.getShape())
@@ -26,9 +26,9 @@ module.exports = class Character extends Grid.Piece
     if @isDead()
       @sprite.gotoAndPlay('defeated')
 
-  _createSheet: (spriteNumber)->
+  _createSheet: (spriteCode)->
     new createjs.SpriteSheet
-      images: ["#{Config.Sprite.PATH}/001.png"]
+      images: ["#{Config.Sprite.PATH}/#{spriteCode}.png"]
       frames: { width: Config.CELL_WIDTH, height: Config.CELL_WIDTH }
       animations:
         down:      [0,   3, 'down', Config.Sprite.FRAME_SPEED]

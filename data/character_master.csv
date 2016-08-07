@@ -1,5 +1,5 @@
-name,spriteNumber,health,power
-標準型,0,2,1
-体力型,1,4,1
-攻撃型,2,1,2
-高性能型,3,4,2
+name,spriteCode,health,power
+標準型,c001,2,1
+体力型,c000,4,1
+攻撃型,c000,1,2
+高性能型,c000,4,2
