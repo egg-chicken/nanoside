@@ -9,8 +9,8 @@ module.exports = class Character extends Grid.Piece
   constructor: (options)->
     super
     @shape = new createjs.Container()
-    @sprite = new createjs.Sprite(@_createSheet(options.spriteCode), "down")
     @flag   = new Flag(@teamCode)
+    @sprite = @_initSprite(options)
     @shape.addChild(@sprite)
     @shape.addChild(@flag.getShape())
 
@@ -25,6 +25,17 @@ module.exports = class Character extends Grid.Piece
     super
     if @isDead()
       @sprite.gotoAndPlay('defeated')
+    else
+      @sprite.gotoAndPlay('damage')
+
+  _initSprite: (options) ->
+    sprite = new createjs.Sprite(@_createSheet(options.spriteCode), "down")
+    sprite.on('animationend', (e) => @_onAnimationEnd(e.name))
+    sprite
+
+  _onAnimationEnd: (name) ->
+    switch name
+      when 'damage' then @sprite.gotoAndPlay(@currentDir)
 
   _createSheet: (spriteCode)->
     new createjs.SpriteSheet
@@ -35,5 +46,6 @@ module.exports = class Character extends Grid.Piece
         up:        [4,   7, 'up', Config.Sprite.FRAME_SPEED]
         left:      [8,  11, 'left', Config.Sprite.FRAME_SPEED]
         right:     [12, 15, 'right', Config.Sprite.FRAME_SPEED]
+        damage:    [16, 16, 'damage', Config.Sprite.FRAME_SPEED]
         defeated:  [16, 19, 'defeated2', Config.Sprite.FRAME_SPEED]
         defeated2: 19
